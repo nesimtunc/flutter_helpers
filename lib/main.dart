@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_helpers/widgets/connectivity_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,20 +36,25 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Hello Flutter',
-              style: Theme.of(context).textTheme.headline2,
+      body: Stack(
+        children: [
+          ConnectivityWidget(),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Hello Flutter',
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                Text(
+                  'There will be bunch of helpful customized widgets around.',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+              ],
             ),
-            Text(
-              'There will be bunch of helpful customized widgets around.',
-              style: Theme.of(context).textTheme.bodyText2,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
