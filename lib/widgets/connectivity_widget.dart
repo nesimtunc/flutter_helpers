@@ -22,37 +22,34 @@ class ConnectivityWidget extends StatelessWidget {
     return StreamBuilder(
         stream: _connectivity.onConnectivityChanged,
         builder: (_, connectivityStream) {
-          if (!connectivityStream.hasError && connectivityStream.hasData) {
-            if (connectivityStream.data != ConnectivityResult.none) {
-              return FutureBuilder<bool>(
-                  future: _checkInternetConnection(),
-                  builder: (context, connectionState) {
-                    if (connectionState.data == true) {
-                      return Container();
-                    }
+          if (!connectivityStream.hasError) {
+            return FutureBuilder<bool>(
+              future: _checkInternetConnection(),
+              builder: (context, connectionState) {
+                if (connectionState.data == true) {
+                  return Container();
+                }
 
-                    return AnimatedContainer(
-                      duration: const Duration(milliseconds: 250),
-                      height: 50,
-                      color: backgroundColor,
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              offlineText,
-                              style: offlineTextSyle ??
-                                  Theme.of(context)
-                                      .textTheme
-                                      .headline6!
-                                      .copyWith(
-                                        color: Colors.white,
-                                      ),
-                            ),
-                          ]),
-                    );
-                  });
-            }
+                return AnimatedContainer(
+                  duration: const Duration(milliseconds: 250),
+                  height: 50,
+                  color: backgroundColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        offlineText,
+                        style: offlineTextSyle ??
+                            Theme.of(context).textTheme.headline6!.copyWith(
+                                  color: Colors.white,
+                                ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
           }
           return Container();
         });
