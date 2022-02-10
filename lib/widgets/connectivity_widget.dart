@@ -31,7 +31,8 @@ class ConnectivityWidget extends StatelessWidget {
                       return Container();
                     }
 
-                    return Container(
+                    return AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
                       height: 50,
                       color: backgroundColor,
                       child: Row(
